@@ -42,6 +42,12 @@ public class Main {
 			   roulette_print();
 			   break; 
 		   case 4 :
+			    int size=roulettes.size();
+			    if(size==0){
+			    	System.out.println("No existen Ruletas creadas para sortear");
+			    	break;
+			    }
+			   roulette_play();
 			   break;
 		   case 5 :
 			   System.out.println("Su sesion fue cerrada correctamente");
@@ -59,7 +65,10 @@ public class Main {
 		System.out.println("");
 		int size=roulettes.size();
 	    for(int i=0;i<size;i++){
-	    	System.out.println("Ruleta numero: "+ roulettes.get(i).id+" Estado: "+roulettes.get(i).state);
+	    	System.out.println("Ruleta numero: "+ roulettes.get(i).id+" Estado: "+roulettes.get(i).state+" balota ganadora: "+roulettes.get(i).winning_ballot+" color Ganador :"+roulettes.get(i).winning_color);
+	    }
+	    if(size==0){
+	    	System.out.println("No existen Ruletas creadas para mostrar");
 	    }
 	 }
 	public static int number_bet(Scanner reader, int number){
@@ -90,7 +99,7 @@ public class Main {
 		do{
 		System.out.print("Ingrese el numero de la ruleta :");
 		reader = new Scanner (System.in); 
-		id_Roulette=reader.nextInt();
+		id_Roulette=reader.nextInt()-1;
 		}while(roulette_validator(id_Roulette));
 		return id_Roulette;
 	}
@@ -131,5 +140,25 @@ public class Main {
 			System.out.println("");
 			System.out.print("Apuesta realizada con exito");
 		}
+	}
+	public static void  roulette_play(){
+		int id_Roulette=0;
+		Scanner reader=new Scanner (System.in);;
+		id_Roulette=roulette_bet(reader,id_Roulette);
+		if(!(roulette_validator(id_Roulette))){
+			
+			int ballot=(int) Math.floor(Math.random()*37);
+			int value_color=(int) Math.floor(Math.random()*2);
+			String color=""; 
+			if(value_color==0){color="negro";}
+			else if(value_color==1){color="rojo";}
+			System.out.println("");
+			roulettes.get(id_Roulette).setState("Cerrada");
+			roulettes.get(id_Roulette).setWinning_ballot(ballot+"");
+			roulettes.get(id_Roulette).setWinning_color(color);
+			System.out.println("Sorteo realizado con exito numero de la ruleta "+id_Roulette+" balota: "+ballot+" color: "+color);
+			
+		};
+
 	}
 }
