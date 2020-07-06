@@ -4,8 +4,8 @@ public class Roulette {
 	 int id;	
 	 String state;
 	 ArrayList<Bet> bets = new ArrayList<Bet>();
-	 String winning_ballot="";
-	 String winning_color="";
+	 String winning_ballot=" Sin Sortear ";
+	 String winning_color=" Sin Sortear ";
 	 public Roulette(int id,String state){			 
 		 this.id=id;
 		 this.state=state;	 		 
