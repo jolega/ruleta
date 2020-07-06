@@ -1,7 +1,5 @@
 package ruleta;
-
 import java.util.ArrayList;
-
 public class Roulette {
 	 int id;	
 	 String state;
