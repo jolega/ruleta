@@ -17,16 +17,13 @@ public class Main {
 	public static void roulette_creation(int quantity){		
 	    for(int i=0;i<quantity;i++){
 	    	consecutive++;
-	    	roulettes.add(new Roulette(consecutive,true));	
+	    	roulettes.add(new Roulette(consecutive,"Abierta"));	
 	    }	
 	}
-	public static void roulette_print(){
-		
+	public static void roulette_print(){		
 		int size=roulettes.size();
 	    for(int i=0;i<size;i++){
 	    	System.out.println("Ruleta numero: "+ roulettes.get(i).id+" Estado: "+roulettes.get(i).state);
-	    	roulettes.add(new Roulette(consecutive,true));	
 	    }
-	 
-	}
+	 }
 }

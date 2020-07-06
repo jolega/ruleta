@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Roulette {
 	 int id;	
-	 boolean state;
+	 String state;
 	 ArrayList<Bet> bets = new ArrayList<Bet>();
-	 public Roulette(int id,boolean state){			 
+	 public Roulette(int id,String state){			 
 		 this.id=id;
 		 this.state=state;	 		 
 	 }
@@ -16,10 +16,10 @@ public class Roulette {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public boolean isState() {
+	public String isState() {
 		return state;
 	}
-	public void setState(boolean state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 	public ArrayList<Bet> getBets() {
