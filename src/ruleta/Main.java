@@ -36,7 +36,7 @@ public class Main {
 				roulette_creation(quantity);
 				roulette_print();
 				System.out.println("");
-				System.out.print("ruletas a crear con exito");
+				System.out.println("ruletas a crear con exito");
 		      break; 
 		   case 3 :			
 			   roulette_print();
@@ -48,6 +48,7 @@ public class Main {
 			    	break;
 			    }
 			   roulette_play();
+			   roulette_print();
 			   break;
 		   case 5 :
 			   System.out.println("Su sesion fue cerrada correctamente");
@@ -99,7 +100,7 @@ public class Main {
 		do{
 		System.out.print("Ingrese el numero de la ruleta :");
 		reader = new Scanner (System.in); 
-		id_Roulette=reader.nextInt()-1;
+		id_Roulette=reader.nextInt();
 		}while(roulette_validator(id_Roulette));
 		return id_Roulette;
 	}
@@ -109,8 +110,7 @@ public class Main {
 	        if(roulettes.get(i).id==id_Roulette && roulettes.get(i).state.equals("Abierta")){
 	        	System.out.println("Ruleta donde se realiza la apuesta numero: "+ roulettes.get(i).id+" Estado: "+roulettes.get(i).state);
 	        	return false;
-	        }
-	    	
+	        }	    	
 	    }
 	    System.out.print("Ingrese el numero de la ruleta existente o abierta :");
 		return true;
@@ -136,29 +136,41 @@ public class Main {
 			value=cash_bet(reader,value);			
 			bet_client=new Bet(number,color,value,id_users);
 			id_Roulette=roulette_bet(reader,id_Roulette);
-			roulettes.get(id_Roulette).new_Bets(bet_client);
+			roulettes.get(id_Roulette-1).new_Bets(bet_client);
 			System.out.println("");
-			System.out.print("Apuesta realizada con exito");
+			System.out.println("Apuesta realizada con exito");
 		}
+	}
+	public static void  print_bets(int id_Roulette){
+		
+		ArrayList<Bet> bets = new ArrayList<Bet>();
+		bets=roulettes.get(id_Roulette-1).getBets();
+		
+		System.out.println("");
+		int size=bets.size();
+	    for(int i=0;i<size;i++){
+	    	System.out.println("Usuario: "+bets.get(i).id_users+" Numero jugado: "+bets.get(i).number+" Color Jugado "+bets.get(i).getColor()+" Valor Apostado "+bets.get(i).value);
+	    }
+	    if(size==0){
+	    	System.out.println("No existen apuestas creadas para mostrar");
+	    }
 	}
 	public static void  roulette_play(){
 		int id_Roulette=0;
 		Scanner reader=new Scanner (System.in);;
 		id_Roulette=roulette_bet(reader,id_Roulette);
-		if(!(roulette_validator(id_Roulette))){
-			
+		if(!(roulette_validator(id_Roulette))){			
 			int ballot=(int) Math.floor(Math.random()*37);
 			int value_color=(int) Math.floor(Math.random()*2);
 			String color=""; 
 			if(value_color==0){color="negro";}
 			else if(value_color==1){color="rojo";}
 			System.out.println("");
-			roulettes.get(id_Roulette).setState("Cerrada");
-			roulettes.get(id_Roulette).setWinning_ballot(ballot+"");
-			roulettes.get(id_Roulette).setWinning_color(color);
-			System.out.println("Sorteo realizado con exito numero de la ruleta "+id_Roulette+" balota: "+ballot+" color: "+color);
-			
+			roulettes.get(id_Roulette-1).setState("Cerrada");
+			roulettes.get(id_Roulette-1).setWinning_ballot(ballot+"");
+			roulettes.get(id_Roulette-1).setWinning_color(color);
+			System.out.println("Sorteo realizado con exito numero de la ruleta "+id_Roulette+" balota: "+ballot+" color: "+color);	
+			print_bets(id_Roulette);
 		};
-
 	}
 }
