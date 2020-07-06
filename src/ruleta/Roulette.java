@@ -27,5 +27,8 @@ public class Roulette {
 	}
 	public void setBets(ArrayList<Bet> bets) {
 		this.bets = bets;
-	}		 	 
+	}	
+	public void new_Bets(Bet place_bets) {
+		bets.add(place_bets);	
+	}
 }

@@ -3,10 +3,12 @@ public class Bet {
 	int number;
 	String color;
 	int value;	
-	public Bet(int number,String color, int value){
+	int id_users;
+	public Bet(int number,String color, int value,int id_users){
 		this.number=number;
 		this.color=color;
-		this.value=value;		
+		this.value=value;	
+		this.id_users=id_users;
 	}
 	public int getNumber() {
 		return number;
